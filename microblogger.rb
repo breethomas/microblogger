@@ -21,6 +21,9 @@ class MicroBlogger
         when 'q' then puts "Goodbye!"
         when 't' then puts tweet(parts[1..-1].join(" "))
         when 'dm' then dm(parts[1], parts[2..-1].join(" "))  
+        when 'spam' then puts spam_my_followers(parts[1..-1].join(" ")) 
+        when 'elt' then everyones_last_tweet
+
         else
           puts "Sorry,I dont know how to (#{command})"
       end
@@ -57,7 +60,24 @@ class MicroBlogger
     end  
     return screen_names
   end
+
+  def spam_my_followers(message)
+    followers_list.each do |screen_name|
+      dm(screen_name, message)
+    end
+  end
+
+  def everyones_last_tweet
+    friends = @client.friends
+    friends.each do |friend|
+      last_tweet = friend.status.text
+      puts ""
+      puts friend.screen_name
+      puts last_tweet
+    end
+  end
 end
 
 blogger = MicroBlogger.new
+blogger.run
 
