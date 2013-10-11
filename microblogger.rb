@@ -1,5 +1,6 @@
 require 'jumpstart_auth'
 require "certified"
+
 class MicroBlogger
   attr_reader :client
 
@@ -77,6 +78,22 @@ class MicroBlogger
     end
   end
 end
+
+#class CSVImporter
+#  def place_results_in_queue(rows)
+#    Queue.new(rows)
+#  end
+#end
+#
+#class Queue
+#  def initialize(rows)
+#    @rows = rows
+#  end
+#
+#  def somemethod
+#    @rows
+#  end
+#end
 
 blogger = MicroBlogger.new
 blogger.run
